@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: org.eclipse.wst:org.eclipse.wst.xml.xpath2.processor:2.1.1.v201204260055">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/eclipse/wst/org.eclipse.wst.xml.xpath2.processor/2.1.1.v201204260055/org.eclipse.wst.xml.xpath2.processor-2.1.1.v201204260055.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/org/eclipse/wst/org.eclipse.wst.xml.xpath2.processor/2.1.1.v201204260055/org.eclipse.wst.xml.xpath2.processor-2.1.1.v201204260055-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/eclipse/wst/org.eclipse.wst.xml.xpath2.processor/2.1.1.v201204260055/org.eclipse.wst.xml.xpath2.processor-2.1.1.v201204260055-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

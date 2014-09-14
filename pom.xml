@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.gigaspaces.wis</groupId>
+    <artifactId>win-integrated-security</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <properties>
+        <gs.version>9.7.1-10800-RELEASE</gs.version>
+        <spring.version>3.2.4.RELEASE</spring.version>
+        <spring.security.version>3.1.4.RELEASE</spring.security.version>
+        <spring.ldap.version>1.3.2.RELEASE</spring.ldap.version>
+    </properties>
+
+    <repositories>
+        <repository>
+            <id>org.openspaces</id>
+            <name>OpenSpaces</name>
+            <url>http://maven-repository.openspaces.org</url>
+            <releases>
+                <enabled>true</enabled>
+                <updatePolicy>daily</updatePolicy>
+                <checksumPolicy>warn</checksumPolicy>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+                <updatePolicy>always</updatePolicy>
+                <checksumPolicy>warn</checksumPolicy>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>thirdparty-uploads</id>
+            <name>JBoss Thirdparty Uploads</name>
+            <url>https://repository.jboss.org/nexus/content/repositories/thirdparty-uploads</url>
+        </repository>
+    </repositories>
+
+    <dependencies>
+        <!-- GS dependencies-->
+        <!--<dependency>-->
+        <!--<artifactId>gs-runtime</artifactId>-->
+        <!--<groupId>com.gigaspaces</groupId>-->
+        <!--<version>${gs.version}</version>-->
+        <!--</dependency>-->
+        <dependency>
+            <artifactId>gs-openspaces</artifactId>
+            <groupId>com.gigaspaces</groupId>
+            <version>${gs.version}</version>
+        </dependency>
+        <!-- Spring dependencies-->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-aop</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-expression</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-core</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+        <!-- Spring Security dependencies-->
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-core</artifactId>
+            <version>${spring.security.version}</version>
+        </dependency>
+
+        <!-- Spring ldap framework -->
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-ldap</artifactId>
+            <version>${spring.security.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.ldap</groupId>
+            <artifactId>spring-ldap-core</artifactId>
+            <version>${spring.ldap.version}</version>
+        </dependency>
+        <!-- JNA dependency -->
+        <!--<dependency>-->
+        <!--<groupId>net.java.dev.jna</groupId>-->
+        <!--<artifactId>jna</artifactId>-->
+        <!--<version>3.5.0</version>-->
+        <!--</dependency>-->
+        <dependency>
+            <groupId>com.github.dblock.waffle</groupId>
+            <artifactId>waffle-jna</artifactId>
+            <version>1.5</version>
+        </dependency>
+
+
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>2.4</version>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <version>2.8</version>
+                <executions>
+                    <execution>
+                        <id>copy-dependencies</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>copy-dependencies</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.directory}/alternateLocation</outputDirectory>
+                            <overWriteReleases>false</overWriteReleases>
+                            <overWriteSnapshots>true</overWriteSnapshots>
+                            <excludeTransitive>true</excludeTransitive>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>

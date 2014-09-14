@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: com.gigaspaces:gs-runtime:9.7.1-10800-RELEASE">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/gigaspaces/gs-runtime/9.7.1-10800-RELEASE/gs-runtime-9.7.1-10800-RELEASE.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/com/gigaspaces/gs-runtime/9.7.1-10800-RELEASE/gs-runtime-9.7.1-10800-RELEASE-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/gigaspaces/gs-runtime/9.7.1-10800-RELEASE/gs-runtime-9.7.1-10800-RELEASE-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
