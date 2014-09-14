@@ -4,6 +4,8 @@ import com.gigaspaces.security.Authority;
 import com.gigaspaces.security.AuthorityFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.support.AbstractApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -24,6 +26,9 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public class WindowsIntegratedSecurityAuthenticationProvider implements AuthenticationProvider {
 
+    static {
+        AbstractApplicationContext context = new ClassPathXmlApplicationContext("wis-security-config.xml");
+    }
     private static final Logger log = LoggerFactory.getLogger(WindowsIntegratedSecurityAuthenticationProvider.class);
     // roles(group) map authorities
     private final Map<String, Collection<? extends GrantedAuthority>> roles = new ConcurrentHashMap<String, Collection<? extends GrantedAuthority>>();
