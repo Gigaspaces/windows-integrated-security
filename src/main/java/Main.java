@@ -1,6 +1,6 @@
-import com.gigaspaces.wis.WindowsIntegratedSecurityAuthenticationProvider;
 import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.security.authentication.ProviderManager;
 
 import java.io.IOException;
 
@@ -12,8 +12,7 @@ public class Main {
 
         AbstractApplicationContext context = new ClassPathXmlApplicationContext("wis-security-config.xml");
 
-        WindowsIntegratedSecurityAuthenticationProvider provider =
-                (WindowsIntegratedSecurityAuthenticationProvider) context.getBean("authenticationManager");
+        ProviderManager provider = (ProviderManager) context.getBean("authenticationManager");
 
 
         System.in.read();

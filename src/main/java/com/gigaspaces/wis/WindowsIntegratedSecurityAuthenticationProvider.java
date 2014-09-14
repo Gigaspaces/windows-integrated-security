@@ -89,11 +89,16 @@ public class WindowsIntegratedSecurityAuthenticationProvider implements Authenti
             ArrayList<GrantedAuthority> authrzs = new ArrayList<GrantedAuthority>();
 
             for (int j = 0; j < p.length; j++) {
-                Authority authority = AuthorityFactory.create(p[j]);
-
+                final Authority authority = AuthorityFactory.create(p[j]);
+                log.info("authority: " + authority);
                 if (authority == null) continue;
 
-                authrzs.add((GrantedAuthority) authority);
+                authrzs.add(new GrantedAuthority() {
+                    @Override
+                    public String getAuthority() {
+                        return authority.toString();
+                    }
+                });
             }
 
             log.info("Add role: " + entry.getKey());

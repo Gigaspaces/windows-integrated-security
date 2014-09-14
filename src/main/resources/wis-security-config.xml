@@ -17,15 +17,8 @@
         </constructor-arg>
     </bean>
 
-    <bean id="authenticator" class="com.gigaspaces.wis.Server" init-method="bootstrap" destroy-method="shutdown">
-        <constructor-arg value="8889"/>
-        <constructor-arg value="Negotiate"/>
-    </bean>
-
     <bean id="windowsAuthenticationProvider"
           class="com.gigaspaces.wis.WindowsIntegratedSecurityAuthenticationProvider">
-        <!--<constructor-arg value="8889"/>-->
-        <!--<constructor-arg value="Negotiate"/>-->
         <constructor-arg ref="authenticator"/>
         <constructor-arg>
             <props>
@@ -34,4 +27,10 @@
             </props>
         </constructor-arg>
     </bean>
+
+    <bean id="authenticator" class="com.gigaspaces.wis.Server" init-method="bootstrap" destroy-method="shutdown">
+        <constructor-arg value="8889"/>
+        <constructor-arg value="Negotiate"/>
+    </bean>
+
 </beans>
