@@ -97,5 +97,7 @@ public class Server {
         }
         pool.shutdown();
 
+//        if (mainThread == null)
+//            mainThread.interrupt();
     }
 }
