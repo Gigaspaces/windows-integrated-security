@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN 2.0//EN" "http://www.springframework.org/dtd/spring-beans-2.0.dtd">
+
+<!--  
+     Spring Security sample configuration file.
+     For detailed information, refer to the GigaSpaces documentation section on Spring-based Security.
+ -->
+
+<beans>
+
+    <bean id="authenticationManager"
+          class="org.springframework.security.authentication.ProviderManager">
+        <constructor-arg>
+            <list>
+                <ref bean="windowsAuthenticationProvider"/>
+            </list>
+        </constructor-arg>
+    </bean>
+
+    <bean id="windowsAuthenticationProvider"
+          class="com.gigaspaces.wis.WindowsIntegratedSecurityAuthenticationProvider">
+        <constructor-arg ref="authenticator"/>
+        <constructor-arg>
+            <props>
+                <prop key="READ_ONLY_ROLE">SpacePrivilege READ</prop>
+                <prop key="READ_WRITE_ROLE">SpacePrivilege WRITE</prop>
+            </props>
+        </constructor-arg>
+    </bean>
+
+    <bean id="authenticator" class="com.gigaspaces.wis.Server" init-method="bootstrap" destroy-method="shutdown">
+        <constructor-arg value="8889"/>
+        <constructor-arg value="Negotiate"/>
+    </bean>
+
+</beans>
