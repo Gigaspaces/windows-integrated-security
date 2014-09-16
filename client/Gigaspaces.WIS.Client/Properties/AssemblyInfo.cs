@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Gigaspaces.WIS.Client.Example")]
+[assembly: AssemblyTitle("Gigaspaces.WIS.Client")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Gigaspaces.WIS.Client.Example")]
+[assembly: AssemblyProduct("Gigaspaces.WIS.Client")]
 [assembly: AssemblyCopyright("Copyright ©  2014")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("0a011b66-5771-4e5b-8f9d-305c6c2dd909")]
+[assembly: Guid("ae293c55-e0f7-45a2-a9d8-2b36247c4667")]
 
 // Version information for an assembly consists of the following four values:
 //

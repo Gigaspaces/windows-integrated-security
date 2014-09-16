@@ -7,13 +7,10 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
-import waffle.windows.auth.IWindowsAccount;
-import waffle.windows.auth.IWindowsIdentity;
 
 import javax.xml.bind.JAXBException;
-import java.io.IOException;
 import java.util.*;
-import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.*;
 
 /**
  * Created by shadim on 9/14/2014.
@@ -25,16 +22,32 @@ public class WindowsIntegratedSecurityAuthenticationProvider implements Authenti
     private static final Logger log = LoggerFactory.getLogger(WindowsIntegratedSecurityAuthenticationProvider.class);
     // roles(group) map authorities
     private final Map<String, Collection<? extends GrantedAuthority>> roles = new ConcurrentHashMap<String, Collection<? extends GrantedAuthority>>();
-    private final Server server;
+    private final ExecutorService pool;
+    // cache authenticated users
+    private final Map<String, IdentityMessage> authenticatedUsers = new ConcurrentHashMap<String, IdentityMessage>();
+    private final int port;
+    private final String hostname;
 
-    public WindowsIntegratedSecurityAuthenticationProvider(Server server, Properties properties) throws IOException, JAXBException {
+//    private com.gigaspaces.wis.Server server;
+//    private final JAXBContext context;
 
+    public WindowsIntegratedSecurityAuthenticationProvider(String host, int port, Properties properties) throws JAXBException {
         log.info("initialize windows integrated security server.");
-
+        this.hostname = host;
+        this.port = port;
+//        this.context = JAXBContext.newInstance(Message.class);
+        this.pool = Executors.newCachedThreadPool();
         populateRoles(properties);
-
-        this.server = server;
     }
+
+//    public WindowsIntegratedSecurityAuthenticationProvider(com.gigaspaces.wis.Server server, Properties properties) throws IOException, JAXBException {
+//
+//        log.info("initialize windows integrated security server.");
+//
+//        populateRoles(properties);
+//
+//        this.server = server;
+//    }
 
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
@@ -43,7 +56,7 @@ public class WindowsIntegratedSecurityAuthenticationProvider implements Authenti
 
         String credentials = (String) authentication.getCredentials();
 
-        IWindowsIdentity identity = server.authenticate(userName, credentials);
+        IdentityMessage identity = authenticate(userName, credentials);
 
         if (identity == null)
             return null;
@@ -52,6 +65,40 @@ public class WindowsIntegratedSecurityAuthenticationProvider implements Authenti
 
         return new UsernamePasswordAuthenticationToken(identity, credentials, authorities);
     }
+
+    private IdentityMessage authenticate(String userName, final String credentials) {
+
+        IdentityMessage identity = authenticatedUsers.get(credentials);
+
+        if (identity == null) {
+
+            try {
+                Future<IdentityMessage> future = pool.submit(createWindowCallback(credentials));
+
+                identity = future.get();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } catch (ExecutionException e) {
+                e.printStackTrace();
+            } catch (JAXBException e) {
+                e.printStackTrace();
+            }
+            if (identity != null) {
+                authenticatedUsers.put(credentials, identity);
+            } else
+                return null;
+        }
+
+        if (!identity.getFqn().contains(userName))
+            return null;
+
+        return identity;
+    }
+
+    private Callable<IdentityMessage> createWindowCallback(String credentials) throws JAXBException {
+        return new WindowsIdentityCallable(hostname, port, credentials);
+    }
+
 
     private void populateRoles(Properties rolesMaps) {
         roles.clear();
@@ -93,29 +140,27 @@ public class WindowsIntegratedSecurityAuthenticationProvider implements Authenti
         }
     }
 
-    public Collection<? extends GrantedAuthority> getUserAuthorities(IWindowsIdentity identity) {
+    public Collection<? extends GrantedAuthority> getUserAuthorities(IdentityMessage identity) {
 
         Collection<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
 
-        IWindowsAccount[] groups = identity.getGroups();
 
-        if (groups != null) {
+        for (String group : identity.getGroups()) {
 
-            for (int i = 0; i < groups.length; i++) {
-                String g = groups[i].getName();
+            Collection<? extends GrantedAuthority> a = roles.get(group);
 
-                Collection<? extends GrantedAuthority> a = roles.get(g);
+            if (a == null) continue;
 
-                if (a == null) continue;
-
-                authorities.addAll(a);
-            }
+            authorities.addAll(a);
         }
+
         return authorities;
     }
 
     @Override
     public boolean supports(Class<?> aClass) {
-        return true;//UsernamePasswordAuthenticationToken.class.isAssignableFrom(aClass);
+        return UsernamePasswordAuthenticationToken.class.isAssignableFrom(aClass);
     }
+
+
 }

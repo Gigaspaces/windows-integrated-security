@@ -19,18 +19,15 @@
 
     <bean id="windowsAuthenticationProvider"
           class="com.gigaspaces.wis.WindowsIntegratedSecurityAuthenticationProvider">
-        <constructor-arg ref="authenticator"/>
+        <constructor-arg value="127.0.0.1" />
+        <constructor-arg value="8889"/>
+        <!-- Roles map -->
         <constructor-arg>
             <props>
                 <prop key="READ_ONLY_ROLE">SpacePrivilege READ</prop>
                 <prop key="READ_WRITE_ROLE">SpacePrivilege WRITE</prop>
             </props>
         </constructor-arg>
-    </bean>
-
-    <bean id="authenticator" class="com.gigaspaces.wis.Server" init-method="bootstrap" destroy-method="shutdown">
-        <constructor-arg value="8889"/>
-        <constructor-arg value="Negotiate"/>
     </bean>
 
 </beans>

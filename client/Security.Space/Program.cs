@@ -16,7 +16,7 @@ using System.Xml;
 using System.Xml.Serialization;
 using Waffle.Windows.AuthProvider;
 
-namespace Security.Space
+namespace Gigaspaces.WIS.Client.ExampleSpace
 {
     class Program
     {
@@ -24,9 +24,7 @@ namespace Security.Space
         {
             try
             {
-                var factory = new SpaceProxyFactory("sp");
-                //factory.Credentials = new SecurityContext("admin", "admin");
-                //factory.Create();
+                
                 string host = null;
                 int port = 0;
                 string sp = "Negotiate";
@@ -43,7 +41,12 @@ namespace Security.Space
 
                 p.Parse(args);
 
-                new Client(host, port, sp).Bootstrap();
+                String id= new Client(host, port, sp).Authenticate();
+
+                Console.WriteLine("password:" + id);
+
+                var factory = new SpaceProxyFactory("sp");
+                factory.Credentials = new SecurityContext(WindowsIdentity.GetCurrent().Name, id);
             }
             catch (Exception ex)
             {

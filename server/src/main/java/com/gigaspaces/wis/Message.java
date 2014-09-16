@@ -18,7 +18,8 @@ public class Message implements Serializable {
             @XmlElement(type = AuthorizationRequiredMessage.class, name = "AuthorizationRequiredMessage"),
             @XmlElement(type = AuthorizedMessage.class, name = "AuthorizedMessage"),
             @XmlElement(type = NotAuthorizedMessage.class, name = "NotAuthorizedMessage"),
-            @XmlElement(type = TokenMessage.class, name = "TokenMessage")
+            @XmlElement(type = TokenMessage.class, name = "TokenMessage"),
+            @XmlElement(type = IdentityMessage.class, name = "IdentityMessage")
     })
     public Object getBody() {
         return body;
