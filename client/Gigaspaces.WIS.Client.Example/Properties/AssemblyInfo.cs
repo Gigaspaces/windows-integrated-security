@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Gigaspaces.WIS.Client.Example")]
+[assembly: AssemblyTitle("Gigaspaces.WIS.WISClient.Example")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Gigaspaces.WIS.Client.Example")]
+[assembly: AssemblyProduct("Gigaspaces.WIS.WISClient.Example")]
 [assembly: AssemblyCopyright("Copyright ©  2014")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

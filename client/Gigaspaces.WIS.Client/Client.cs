@@ -14,7 +14,7 @@ using Waffle.Windows.AuthProvider;
 
 namespace Security.Space
 {
-    public class Client
+    public class WISClient
     {
         private WindowsSecurityContext clientContext;
         private WindowsSecurityContext initContext;
@@ -24,7 +24,7 @@ namespace Security.Space
         private IPEndPoint remoteEP;
         private string package;
 
-        public Client(string host, int port, string package)
+        public WISClient(string host, int port, string package)
         {
             this.package = package;
             this._defaultNamespace = new XmlSerializerNamespaces();
