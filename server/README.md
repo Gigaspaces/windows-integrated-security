@@ -17,16 +17,17 @@ to use windows integration security server:
 
 1. Enable XAP security
 2. Copy the following jar to `<Gigaspaces Home>\Runtime\lib\optional\security`
-* win-integrated-security-[version]-SNAPSHOT.jar
-* commons-cli-1.2.jar
-* guava-13.0.1.jar
-* jna-3.5.0.jar
-* platform-3.5.0.jar
-* slf4j-api-1.7.2.jar
-* spring-security-config-3.1.4.RELEASE.jar
-* spring-security-core-3.1.4.RELEASE.jar
-* spring-security-web-3.1.4.RELEASE.jar
-* waffle-jna-1.5.jar
+
+        win-integrated-security-[version]-SNAPSHOT.jar
+        commons-cli-1.2.jar
+        guava-13.0.1.jar
+        jna-3.5.0.jar
+        platform-3.5.0.jar
+        slf4j-api-1.7.2.jar
+        spring-security-config-3.1.4.RELEASE.jar
+        spring-security-core-3.1.4.RELEASE.jar
+        spring-security-web-3.1.4.RELEASE.jar
+        waffle-jna-1.5.jar
 
 3. copy spring security template configuration:
     * copy `<project>\src\main\resources\wis-security-config.xml` `<Gigaspaces Home>\Runtime\config\security`
