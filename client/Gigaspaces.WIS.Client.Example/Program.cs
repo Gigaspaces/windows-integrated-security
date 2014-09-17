@@ -42,19 +42,22 @@ namespace Gigaspaces.WIS.Client.ExampleSpace
 
                 p.Parse(args);
 
-                String id= new WISClient(host, port, sp).Authenticate();
+                String token= new WISClient(host, port, sp).Authenticate();
 
-                Console.WriteLine("password:" + id);
+                Console.WriteLine("password:" + token);
 
                 var factory = new SpaceProxyFactory("sp");
-                factory.Credentials = new SecurityContext(WindowsIdentity.GetCurrent().Name, id);
+                factory.Credentials = new SecurityContext(WindowsIdentity.GetCurrent().Name, token);
 
                 ISpaceProxy proxy=factory.Create();
 
                 proxy.Write(new
                 {
-                    Name = "Shadi Massalha"
+                    Name = "Windows Integrated Server"
                 });
+
+             
+                
             }
             catch (Exception ex)
             {
