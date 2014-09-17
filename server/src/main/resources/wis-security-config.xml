@@ -19,13 +19,19 @@
 
     <bean id="windowsAuthenticationProvider"
           class="com.gigaspaces.wis.WindowsIntegratedSecurityAuthenticationProvider">
+        <!-- windows integrated security server ip-->
         <constructor-arg value="127.0.0.1" />
+        <!-- windows integrated security server listening port-->
         <constructor-arg value="8889"/>
-        <!-- Roles map -->
+        <!--
+            Roles map
+             key - Name of Windows Group
+             value - comma delimited list of Roles role1,role2,...,roleN
+        -->
         <constructor-arg>
             <props>
-                <prop key="READ_ONLY_ROLE">SpacePrivilege READ</prop>
-                <prop key="READ_WRITE_ROLE">SpacePrivilege WRITE</prop>
+                <prop key="Administrators">GridPrivilege MANAGE_GRID,GridPrivilege MANAGE_PU,GridPrivilege PROVISION_PU</prop>
+                <prop key="Users">SpacePrivilege READ</prop>
             </props>
         </constructor-arg>
     </bean>

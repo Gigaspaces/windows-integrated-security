@@ -46,7 +46,7 @@
     <Compile Include="AuthorizedMessage.cs" />
     <Compile Include="AuthoriztionRequiredMessage.cs" />
     <Compile Include="BitUtils.cs" />
-    <Compile Include="Client.cs" />
+    <Compile Include="WISClient.cs" />
     <Compile Include="HelloMessage.cs" />
     <Compile Include="IdentityMessage.cs" />
     <Compile Include="Message.cs" />
