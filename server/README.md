@@ -17,7 +17,7 @@ to use windows integration security server:
 
 1. Enable XAP security
 2. Copy the following jar to `<Gigaspaces Home>\Runtime\lib\optional\security`
-* `win-integrated-security-[version]-SNAPSHOT.jar`
+* win-integrated-security-[version]-SNAPSHOT.jar
 * commons-cli-1.2.jar
 * guava-13.0.1.jar
 * jna-3.5.0.jar
