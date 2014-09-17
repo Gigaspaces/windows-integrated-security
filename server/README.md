@@ -1,5 +1,10 @@
 Windows Integrated Security Server
 ==================================
+this implementation includes spring AuthenticationProvider to supports windows integrated security.
+and token server that the client should be authenticated against.
+
+the token server can be running standalone or with gs-agent.
+
 
 Build
 =====
