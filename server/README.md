@@ -33,14 +33,11 @@ to use windows integration security server:
     * copy `<project>\src\main\resources\wis-security-config.xml` `<Gigaspaces Home>\Runtime\config\security`
     * optionally rename the `win-security-config.xml` to `security-config.xml`
 4. edit `security.properties` file and make it point to step 3 config file
-
-security.properties example:   
-
- ```
- com.gs.security.security-manager.class=org.openspaces.security.spring.SpringSecurityManager
- spring-security-config-location=../../Runtime/config/security/security-config.xml
- ```
- 
+    * security.properties example:   
+    ```
+        com.gs.security.security-manager.class=org.openspaces.security.spring.SpringSecurityManager
+        spring-security-config-location=../../Runtime/config/security/security-config.xml
+    ``` 
 5. run the windows integrated security server:
     * copy `<project>\src\main\resources\server to the location where your server should be reside
     * copy the required jars to `server\lib` see the README at lib folder
